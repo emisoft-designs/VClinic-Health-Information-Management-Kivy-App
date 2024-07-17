@@ -56,7 +56,7 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon=['frontend/static/images/icon_sm.ico'],
-    version='frontend/version.txt',
+    version='version.txt',
     author='Somtochukwu Owen Ikeanyi'
 )
 
