@@ -1,0 +1,55 @@
+<RegisterScreen>:
+    RelativeLayout:
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 0.7)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 10
+            elevation: 10 
+            size_hint: (0.6, 0.25)
+            pos_hint : {'center_x': 0.5,'center_y': 0.4} 
+
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.65
+                BoxShadow:
+                    pos: self.pos
+                    size: self.size
+                    offset: 0, -10
+                    blur_radius: 25
+                    spread_radius: -10, -10
+                    border_radius: 10, 10, 10, 10
+                    
+            BoxLayout: 
+                orientation: 'vertical'
+                padding: 5
+                spacing: 10
+                size_hint_y: 1.5
+                
+                canvas.before:
+                    Color:
+                        rgba: (0, 0.5, 0.7, 1)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size 
+                
+                GridLayout:
+                    cols: 2
+                    spacing: 10
+
+                    AnimatedButton:
+                        text: 'Patient Register'
+                        background_normal: ''
+                        background_color: (0, 0.5, 0.7, 1)
+                        on_press: app.root.current = 'register'
+
+                    AnimatedButton:
+                        text: 'Employee Register'
+                        background_normal: ''
+                        background_color: (0, 0.5, 0.7, 1)
+                        on_press: app.root.current = 'register'
