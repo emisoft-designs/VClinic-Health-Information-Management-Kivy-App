@@ -10,7 +10,7 @@ urlpatterns = [
     path('patients/', PatientListView.as_view(), name='patient-list'),
     path('patients/<int:pk>/', PatientDetailView.as_view(), name='patient-detail'),
     
-    path('patients/register/', RegisterPatientView.as_view(), name='register-patient'),
+    path('patients/register/', RegisterPatientView.as_view(), name='register-patient'), 
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
 ]

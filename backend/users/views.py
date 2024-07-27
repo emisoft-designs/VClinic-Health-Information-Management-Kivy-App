@@ -2,6 +2,10 @@
 
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from rest_framework.exceptions import ValidationError
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import update_last_login
+from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.models import Token
 from rest_framework import generics, status, permissions
 from rest_framework.authentication import TokenAuthentication
@@ -19,30 +23,27 @@ from .models import Patient
 CustomUser = get_user_model()
 
 class LoginView(APIView):
+    permission_classes = (AllowAny,)
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
-            print(f"backend - serializer: {serializer.data}")
-            username = serializer.validated_data['username']
-            password = serializer.validated_data['password']
-            print(f"Username: {username}, Password: {password}")
-
-            user = authenticate(request, username=username, password=password)
-            
-            if user:
-                token, created = Token.objects.get_or_create(user=user)
-                response = {
-                    'success': True,
-                    'username': user.username,
-                    'email': user.email,
-                    'token': token.key, 
-                    'detail': 'Login Successful' 
-                }
-                return Response(response, status=status.HTTP_200_OK)
-            else:
-                return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-        return Response({'detail':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-    
+            user = serializer.validated_data['user']
+            token, created = Token.objects.get_or_create(user=user)
+            update_last_login(None, user)
+            response = {
+                'success': True,
+                'username': user.username,
+                'email': user.email,
+                'token': token.key,
+                'detail': 'Login Successful'
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        return Response({'detail': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
