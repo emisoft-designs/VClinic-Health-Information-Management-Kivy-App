@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = 'http://127.0.0.1:8000/'
+BASE_URL = 'http://127.0.0.1:8000/api/'
 auth_token = None
 
 def set_auth_token(token):
@@ -14,16 +14,16 @@ def get_headers():
     return headers
 
 def login_user(username, password):
-    url = BASE_URL + 'api-token-auth/' 
+    url = BASE_URL + 'login/' 
     data = {'username': username, 'password': password} 
     response = requests.post(url, json=data, headers=get_headers())
     if response.status_code == 200:
         token = response.json().get('token') 
         set_auth_token(token)
-        return token
+        return response
     
 def logout_user():
-    url = BASE_URL + 'api-token-auth/' 
+    url = BASE_URL + 'logout/' 
     response = requests.post(url, headers=get_headers())
     if response.status_code == 200: 
         set_auth_token(None) 
