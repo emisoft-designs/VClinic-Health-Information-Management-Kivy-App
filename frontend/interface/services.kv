@@ -1,0 +1,93 @@
+<ServiceScreen>:
+    RelativeLayout:
+        pos_hint: {'center_x': 0.5,'center_y': 0.5}
+
+        Image:
+            source: 'static/images/img_4.jpg'
+            fit_mode: 'cover' 
+
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (255, 255, 255, 0.5)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Header Menu Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            id: menu_bar
+
+            canvas.before:
+                Color:
+                    rgba: (1, 1, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            BoxLayout: 
+                height: 50
+                id: menu_list 
+                AnimatedButton:
+                    text: 'Home'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'home'
+
+                AnimatedButton:
+                    text: 'Contacts'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'contact'
+
+                AnimatedButton:
+                    text: 'About Us'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'about'
+
+                AnimatedButton:
+                    text: 'New Patient'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'register_patient'
+                        
+                AnimatedButton:
+                    text: 'Notifications'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'notifications'
+
+                AnimatedButton:
+                    text: 'Logout'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press:
+                        root.logout()
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'login'
+
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            scroll_type: ['bars', 'content']
+            bar_width: 10  # Set the desired width of the scrollbar
+            bar_color: 0, 0, 0, 1  # Optional: Set the color of the scrollbar 
+            bar_inactive_color: 0, 0, 0, 0.6  # Optional: Set the inactive color of the scrollbar
+
+            BoxLayout:
+                spacing: 10

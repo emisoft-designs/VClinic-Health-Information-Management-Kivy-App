@@ -1,0 +1,97 @@
+<GynaeListScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0, 0.5, 0.7, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        GridLayout:
+            cols: 5
+            size_hint_y: 0.1
+            spacing: 1
+            
+            Button:
+                text: "Back"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'gynae_dashboard'
+            Button:
+                text: "Home"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'home'
+            Button:
+                text: "New Patient Record"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'patient_gynae_form'
+            Button:
+                text: "Notifications"
+                on_press: app.root.current = 'notifications'
+            Button:
+                text: "Logout"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'login'
+
+
+        # Body
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 10
+            spacing: 20 
+            canvas.before:
+                Color:
+                    rgba: (0, 0.5, 0.7, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: root.get_record_title()
+                font_size: 48
+                color: (1, 1, 1, 1)
+                size_hint_y: None
+                height: 50
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                scroll_type: ['bars', 'content']
+                bar_width: 10  # Set the desired width of the scrollbar
+                bar_color: 0, 0, 0, 1  # Optional: Set the color of the scrollbar 
+                bar_inactive_color: 0, 0, 0, 0.6  # Optional: Set the inactive color of the scrollbar
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: 1200 
+
+                    GridLayout:
+                        id: record_table
+                        cols: 1
+                        spacing: 10
+                        size_hint: None, None
+                        size: (850, 1200)
+                        pos_hint: {"center_x":0.5, "center_y":0.5}
+
+
+                        
+        # Footer
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            canvas.before:
+                Color:
+                    rgba: (0.2, 0.6, 0.8, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: '© 2024 Hospital Management System. All rights reserved.'
+                color: (1, 1, 1, 1)
+                size_hint_y: None
+                height: 50
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}

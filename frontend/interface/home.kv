@@ -1,0 +1,196 @@
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 0.7)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Header Menu Bar
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            id: menu_bar
+
+            canvas.before:
+                Color:
+                    rgba: (1, 1, 1, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            BoxLayout: 
+                height: 50
+                id: menu_list 
+
+                AnimatedButton:
+                    text: 'Services'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'services'
+
+                AnimatedButton:
+                    text: 'Contacts'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'contact'
+
+                AnimatedButton:
+                    text: 'About Us'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'about'
+
+                AnimatedButton:
+                    text: 'New Patient'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'register_patient'
+                        
+                AnimatedButton:
+                    text: 'Notifications'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press: 
+                        app.root.transition.direction = 'left'
+                        app.root.current = 'notifications'
+                        
+                AnimatedButton:
+                    text: 'Logout'
+                    background_normal: ''
+                    background_color: (0, 0.5, 0.7, 1)
+                    on_press:
+                        root.logout()
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'login'
+
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Image with Overlay and Text
+                RelativeLayout:
+                    size_hint_y: None
+                    height: 300
+                    Carousel:
+                        direction: 'right'
+                        scroll_timeout: 100
+                        Image:
+                            source: 'static/images/img_2.png' 
+                            fit_mode: 'cover'
+                            size: 1, 1
+                        Image:
+                            source: 'static/images/img_1.jpg' 
+                            fit_mode: 'cover'
+                            size: 1, 1
+                        Image:
+                            source: 'static/images/img_3.jpg' 
+                            fit_mode: 'cover'
+                            size: 1, 1
+                        Image:
+                            source: 'static/images/img_4.jpg' 
+                            fit_mode: 'cover'
+                            size: 1, 1
+                        
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, 1
+                        pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+                        canvas.before:
+                            Color:
+                                rgba: (0, 0, 0, 0.5)
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size 
+                        Label:
+                            text: 'Welcome to our hospital'
+                            font_size: '64sp'
+                            color: (1, 1, 1, 1)
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                        RelativeLayout:
+                            padding: 5
+                            BoxLayout:
+                                spacing: 0
+                                size_hint: 0.7, 0
+                                pos_hint: {'center_x':0.5, 'center_y':0.5}
+                                size_hint_y: None
+                                height: 50
+                                row_default_height: 50
+
+                                TextInput:
+                                    id: search_bar
+                                    hint_text: 'Enter Patient Name, or File Number'
+                                    font_size: 16 
+                                    size_hint: (0.7, None)
+                                    size_hint_y: None
+                                    multiline: False
+                                    height: 50
+                                    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+
+                                Button:
+                                    text: 'Search'
+                                    size_hint: (0.3, None)
+                                    size_hint_y: None
+                                    height: 50
+                                    on_press: app.root.current = 'home'
+
+
+                # Button Grid
+                GridLayout:
+                    cols: 4
+                    spacing: 10
+                    padding: 5
+                    size_hint_y: None
+                    height: 300
+
+                    AnimatedButton:
+                        text: 'Prenatal Services'
+                        on_press: 
+                            app.root.transition.direction = 'left'
+                            app.root.current = 'obstetrics'
+                    AnimatedButton:
+                        text: 'Postnatal Services'
+                        on_press: 
+                            app.root.transition.direction = 'left'
+                            app.root.current = 'obstetrics'
+                    AnimatedButton:
+                        text: 'Gynaecological Services'
+                        on_press: 
+                            app.root.transition.direction = 'left'
+                            app.root.current = 'gynae'
+                    AnimatedButton:
+                        text: 'Laboratory Services' 
+                        on_press: 
+                            app.root.transition.direction = 'left'
+                            app.root.current = 'laboratory'
+
+                # Footer
+                BoxLayout:
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgba: (0.2, 0.6, 0.8, 1)
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    Label:
+                        text: '© 2024 Hospital Management System. All rights reserved.'
+                        color: (1, 1, 1, 1)
+                        size_hint_y: None
+                        height: 50
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
