@@ -1,8 +1,7 @@
-# urls.py
-
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
-from .views import UserListView, UserDetailView, AssignPrivilegesView, PatientListView, PatientDetailView
+from .views import (RegisterPatientView, LoginView, LogoutView, 
+                    UserListView, UserDetailView, AssignPrivilegesView, 
+                    PatientListView, PatientDetailView)
 
 urlpatterns = [
     path('users/', UserListView.as_view(), name='user-list'),
@@ -10,6 +9,8 @@ urlpatterns = [
     path('users/<int:pk>/assign_privileges/', AssignPrivilegesView.as_view(), name='assign-privileges'),
     path('patients/', PatientListView.as_view(), name='patient-list'),
     path('patients/<int:pk>/', PatientDetailView.as_view(), name='patient-detail'),
+    
+    path('patients/register/', RegisterPatientView.as_view(), name='register-patient'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
