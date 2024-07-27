@@ -1,6 +1,2 @@
 *.pyc
 __pycache__/
-migrations/
-dumps/
-build/
-dist/
