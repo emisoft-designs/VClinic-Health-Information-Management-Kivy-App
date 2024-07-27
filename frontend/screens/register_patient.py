@@ -4,9 +4,7 @@ import os
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder 
-from backend import logout_user
-
-from backend import register_patient
+from backend import logout_user, register_patient
 
 # Get the absolute path of the .kv file
 kv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 
@@ -56,7 +54,7 @@ class RegisterPatientScreen(Screen):
         print(response)
         
     def logout(self):
-        # response = logout_user()
-        # if response.get('detail') == 'Logout Successful':
-        #     print('You have been successfully logged out')
+        response = logout_user()
+        if response.get('detail') == 'Logout Successful':
+            print('You have been successfully logged out')
         pass

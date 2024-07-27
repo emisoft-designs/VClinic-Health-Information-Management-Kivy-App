@@ -14,7 +14,7 @@ from kivy.uix.popup import Popup
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
 
-# from backend import logout_user
+from backend import logout_user
 
 
 dashboard_kv_path = os.path.abspath(os.path.join(
@@ -85,10 +85,7 @@ class LabDashboardScreen(Screen):
         cancelbtn.bind(on_press=self.popup.dismiss)
 
     def logout(self):
-        # response = logout_user()
-        # if response.get('detail') == 'Logout Successful':
-        #     print('You have been successfully logged out')
-        pass
+        logout_user()
 
     def search_other_tests(self):
         widget = TextInput(hint_text='Search for a test')
@@ -112,6 +109,10 @@ class LabDashboardScreen(Screen):
 class LabTestFormScreen(Screen):
     def __init__(self, **kwargs):
         super(LabTestFormScreen, self).__init__(**kwargs)
+                                                
+    def logout(self):
+        logout_user()
+
 
 class LabTestListScreen(Screen):
     def __init__(self, **kwargs):
@@ -121,6 +122,9 @@ class LabTestListScreen(Screen):
     def on_kv_post(self, base_widget):
         self.grid_layout = self.ids.record_table
         self.grid_layout.add_widget(self.layout)
+
+    def logout(self):
+        logout_user()
     
     def get_record_title(self):
         first_name  = "Jame"
@@ -243,27 +247,45 @@ class LabTestDetailScreen(Screen):
         first_name  = "Jame"
         last_name = "Clement"
         return f"{first_name} {last_name} Test Records"
+        
+    def logout(self):
+        logout_user()
 
 # Custom Tests
 class SubfertilityTestForm(Screen):
     def __init__(self, **kwargs):
         super(SubfertilityTestForm, self).__init__(**kwargs)
+        
+    def logout(self):
+        logout_user()
 
 class PrenatalTestForm(Screen):
     def __init__(self, **kwargs):
         super(PrenatalTestForm, self).__init__(**kwargs)
+        
+    def logout(self):
+        logout_user()
 
 class GynaePreOpTestForm(Screen):
     def __init__(self, **kwargs):
         super(GynaePreOpTestForm, self).__init__(**kwargs)
+        
+    def logout(self):
+        logout_user()
 
 class CSectionTestForm(Screen):
     def __init__(self, **kwargs):
         super(CSectionTestForm, self).__init__(**kwargs)
+        
+    def logout(self):
+        logout_user()
 
 class HIVTestForm(Screen):
     def __init__(self, **kwargs):
         super(HIVTestForm, self).__init__(**kwargs)
+        
+    def logout(self):
+        logout_user()
 
 
 
