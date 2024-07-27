@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model
 from rest_framework.exceptions import ValidationError
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -7,14 +7,24 @@ from .models import Patient
 
 CustomUser = get_user_model()
 
-class UserLoginSerializer(serializers.ModelSerializer):
-    id = serializers.PrimaryKeyRelatedField(read_only=True)
-    username = serializers.CharField(read_only=True)
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
     password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        username = data.get('username')
+        password = data.get('password')
+        if not username or not password:
+            raise serializers.ValidationError("Must include 'username' and 'password'")
+        user = authenticate(username=username, password=password)
+        if not user:
+            raise serializers.ValidationError("Invalid credentials")
+        data['user'] = user
+        return data
 
     class Meta:
         model = CustomUser
-        fields = ["id", "username", "password"]
+        fields = ["username", "password"]
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
