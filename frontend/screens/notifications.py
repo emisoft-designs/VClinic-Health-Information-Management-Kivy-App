@@ -3,7 +3,7 @@
 import os
 from kivymd.uix.screen import Screen 
 from kivy.lang import Builder  
-# from backend import logout_user
+from backend import logout_user
 
 # Get the absolute path of the .kv file
 kv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'interface', 'notify.kv'))
@@ -14,8 +14,8 @@ class NotificationScreen(Screen):
         super(NotificationScreen, self).__init__(**kwargs)  
         
     def logout(self):
-        # response = logout_user()
-        # if response.get('detail') == 'Logout Successful':
-        #     print('You have been successfully logged out')
+        response = logout_user()
+        if response.get('detail') == 'Logout Successful':
+            print('You have been successfully logged out')
         pass
         

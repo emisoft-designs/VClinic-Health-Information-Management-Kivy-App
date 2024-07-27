@@ -33,6 +33,7 @@
             Button:
                 text: "Logout"
                 on_press: 
+                    root.logout()
                     app.root.transition.direction = 'right'
                     app.root.current = 'login'
 

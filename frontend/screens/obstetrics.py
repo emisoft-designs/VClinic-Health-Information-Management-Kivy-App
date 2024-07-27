@@ -15,6 +15,8 @@ from kivy.uix.popup import Popup
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
 
+from backend import logout_user
+
 dashboard_kv_path = os.path.abspath(os.path.join(
     os.path.dirname(__file__), '..', 'interface','clinic' ,'obstetrics','obstetrics.kv'))
 list_kv_path = os.path.abspath(os.path.join(
@@ -66,9 +68,9 @@ class ObstetricsDashboardScreen(Screen):
         cancelbtn.bind(on_press=self.popup.dismiss)
 
     def logout(self):
-        # response = logout_user()
-        # if response.get('detail') == 'Logout Successful':
-        #     print('You have been successfully logged out')
+        response = logout_user()
+        if response.get('detail') == 'Logout Successful':
+            print('You have been successfully logged out')
         pass
 
     def search_other_tests(self):
