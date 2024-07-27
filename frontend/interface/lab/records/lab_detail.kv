@@ -1,0 +1,148 @@
+<LabTestDetailScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0, 0.5, 0.7, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        GridLayout:
+            cols: 5
+            size_hint_y: 0.1
+            spacing: 1
+            
+            Button:
+                text: "Back"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'lab_dashboard'
+            Button:
+                text: "Home"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'home'
+            Button:
+                text: "Patient Test History"
+                on_press: 
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'lab_test_list'
+            Button:
+                text: "Notifications"
+                on_press: app.root.current = 'notifications'
+            Button:
+                text: "Logout"
+                on_press: 
+                    root.logout()
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'login'
+
+        # Main Content
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 10
+            spacing: 20
+            
+            canvas.before:
+                Color:
+                    rgba: (0, 0.5, 0.7, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: root.get_record_title()
+                font_size: 48
+                color: (1, 1, 1, 1)
+                size_hint_y: None
+                height: 50
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True 
+                scroll_type: ['bars', 'content']
+                bar_width: 10  # Set the desired width of the scrollbar
+                bar_color: 0, 0, 0, 1  # Optional: Set the color of the scrollbar 
+                bar_inactive_color: 0, 0, 0, 0.6  # Optional: Set the inactive color of the scrollbar
+                
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: 1700 
+
+                    GridLayout:
+                        cols: 1
+                        spacing: 10           
+                        size_hint: (None, None)
+                        size: (850, 1700)
+                        pos_hint: {"center_x":0.5, "center_y":0.5}
+
+                        TextInput:
+                            id: test_name
+                            hint_text: 'Test Name'
+                            size_hint_y: None
+                            height: 50
+                            font_size: 16
+                            multiline: False
+                            # top, bottom
+                            padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                        TextInput:
+                            id: result_unit
+                            hint_text: 'Result Unit' 
+                            font_size: 16 
+                            size_hint_y: None
+                            height: 50
+                            multiline: False
+                            # top, bottom
+                            padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                        TextInput:
+                            id: test_esc
+                            hint_text: 'Test ESC'
+                            size_hint_y: None
+                            height: 200
+                            font_size: 16 
+                            multiline: True
+                        TextInput:
+                            id: test_psa
+                            hint_text: 'Test PSA'
+                            size_hint_y: None
+                            height: 200
+                            font_size: 16 
+                            multiline: True
+                        TextInput:
+                            id: test_sau
+                            hint_text: 'Test SAU'
+                            size_hint_y: None
+                            height: 200
+                            font_size: 16 
+                            multiline: True
+                        TextInput:
+                            id: test_result
+                            hint_text: 'Test Result'
+                            size_hint_y: None
+                            height: 400
+                            font_size: 16 
+                            multiline: True
+                        TextInput:
+                            id: result_interpretation
+                            hint_text: 'Test Result Interpretation'
+                            size_hint_y: None
+                            height: 600
+                            font_size: 16 
+                            multiline: True
+    
+        # Footer
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            canvas.before:
+                Color:
+                    rgba: (0.2, 0.6, 0.8, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: '© 2024 Hospital Management System. All rights reserved.'
+                color: (1, 1, 1, 1)
+                size_hint_y: None
+                height: 50
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
