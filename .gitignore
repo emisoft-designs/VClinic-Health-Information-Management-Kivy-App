@@ -5,3 +5,4 @@ dumps/
 build/
 dist/
 db.sqlite3
+.venv/
